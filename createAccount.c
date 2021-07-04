@@ -7,7 +7,7 @@ void createAccount(struct accountdetail *account)
 
    printf("Account Holder Name : ");
    fscanf(stdin,"%s",account->name)!=EOF;
-   fprintf(fp,"%s,",account->name);
+   fprintf(fp,"\n%s,",account->name);
    
    printf("\ndd/mm/yyyy : ");
    fscanf(stdin,"%d %d %d",&account->date.dd,&account->date.mm,&account->date.yy);
@@ -60,7 +60,7 @@ void createAccount(struct accountdetail *account)
     printf("\n");
     printf("Enter the choice(Savings,Current) : ");
     fscanf(stdin,"%s",account->acctype);
-    fprintf(fp,"%s,",account->acctype);
+    fprintf(fp,"%s",account->acctype);
 
     printf("\nYour has been sucessfull created");
 
