@@ -11,24 +11,26 @@ long accountN;
 
 void createAccount(struct accountdetail *account)
 {
+    char *accountnumber;                              //localvariable
+    strcpy(accountnumber,accountNo);
+
     FILE *fp, *global;
     char buffer[1024];
 
-    fp = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\AccountDetails.csv", "a++");
+    fp = fopen("AccountDetails.csv", "a++");
 
-    global = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\global.csv", "r");
+    global = fopen("global.csv", "r");
 
     fgets(buffer, 1024, global);
 
     accountNo = strtok(buffer, ",");
-    date = strtok(NULL, ",");
+    date = strtok(NULL , ",");
 
-    printf("%s", accountNo);
-    printf("%s", date);
+    fprintf(fp,"\n%s,",accountNo);
 
     printf("Account Holder Name : ");
     fscanf(stdin, "%s", account->name) != EOF;
-    fprintf(fp, "\n%s,", account->name);
+    fprintf(fp, "%s,", account->name);
     fflush(stdin);
 
     printf("\ndd/mm/yyyy : ");
@@ -98,7 +100,10 @@ void createAccount(struct accountdetail *account)
 
     createDB();
 
-    printf("\nYour has been sucessfull created");
+    printf("\nYour has been sucessfull created\n");
+    printf("\n");
+
+    printf("Your account number is %s and is been created on %s \n",accountnumber,date);
 
     fclose(fp);
     fclose(global);
@@ -110,13 +115,16 @@ void createDB()
     FILE *global;
     char* e;
 
-    global = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\global.csv", "w");
+    FILE *accountfile;
+
+    global = fopen("global.csv", "w");
 
     accountN = strtol(accountNo, &e, 10);
-    accountN++;
+    
+    strcat(accountNo,".csv");                 
+    accountfile=fopen(accountNo,"a+");
 
-    //Prajwal your code here.
-    //Use accountNo for string operations and accountN for integer operations
+    accountN++;
 
     fprintf(global, "%ld,%s", accountN, date);
 
