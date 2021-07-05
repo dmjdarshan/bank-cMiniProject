@@ -11,9 +11,6 @@ long accountN;
 
 void createAccount(struct accountdetail *account)
 {
-    char *accountnumber;                              //localvariable
-    strcpy(accountnumber,accountNo);
-
     FILE *fp, *global;
     char buffer[1024];
 
@@ -103,7 +100,8 @@ void createAccount(struct accountdetail *account)
     printf("\nYour has been sucessfull created\n");
     printf("\n");
 
-    printf("Your account number is %s and is been created on %s \n",accountnumber,date);
+    printf("Your account number is %ld \n",accountN);
+    );
 
     fclose(fp);
     fclose(global);
