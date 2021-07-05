@@ -31,8 +31,13 @@ void createAccount(struct accountdetail *account)
     fflush(stdin);
 
     printf("\ndd/mm/yyyy : ");
-    fscanf(stdin, "%d %d %d", &account->date.dd, &account->date.mm, &account->date.yy);
-    fprintf(fp, "%d / %d / %d ,", account->date.dd, account->date.mm, account->date.yy);
+    fscanf(stdin, "%d/%d/%d", &account->date.dd, &account->date.mm, &account->date.yy);
+    fprintf(fp, "%d",account->date.dd);
+    fprintf(fp,"/");
+    fprintf(fp,"%d",account->date.mm);
+    fprintf(fp,"/");
+    fprintf(fp,"%d",account->date.yy);
+    fprintf(fp,"/,");
     fflush(stdin);
 
     printf("\nGender : ");
@@ -100,8 +105,8 @@ void createAccount(struct accountdetail *account)
     printf("\nYour has been sucessfull created\n");
     printf("\n");
 
-    printf("Your account number is %ld \n",accountN);
-    );
+    printf("Your account number is %ld \n",(accountN-1));
+    
 
     fclose(fp);
     fclose(global);
