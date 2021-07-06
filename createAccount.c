@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "header.h"
 
-void createDB();
+void createDB(struct accountdetail *temp);
 
 char* accountNo;
 char* date;
@@ -14,11 +14,9 @@ void createAccount(struct accountdetail *account)
     FILE *fp, *global;
     char buffer[1024];
 
-    
+    fp = fopen("AccountDetails.csv", "a++");
 
-    fp = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\AccountDetails.csv", "a++");
-
-    global = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\global.csv", "r");
+    global = fopen("global.csv", "r");
 
     fgets(buffer, 1024, global);
 
@@ -28,7 +26,7 @@ void createAccount(struct accountdetail *account)
     fprintf(fp,"\n%s,",accountNo);
 
     printf("Account Holder Name : ");
-    fscanf(stdin, "%s", account->name) != EOF;
+    fscanf(stdin, "%s", account->name);
     fprintf(fp, "%s,", account->name);
     fflush(stdin);
 
@@ -100,9 +98,10 @@ void createAccount(struct accountdetail *account)
     fscanf(stdin, "%s", account->acctype);
     fprintf(fp, "%s", account->acctype);
 
-   
+    struct accountdetail temp;
+    temp=*account;
 
-    createDB();
+    createDB(&temp);
 
     printf("\nYour has been sucessfull created\n");
     printf("\n");
@@ -115,21 +114,28 @@ void createAccount(struct accountdetail *account)
 }
 
 
-void createDB()
+void createDB(struct accountdetail *temp)
 {
+
     FILE *global;
     char* e;
-    char* path = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
 
     FILE *accountfile;
 
-    global = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\global.csv", "w");
+    global = fopen("global.csv", "w");
 
     accountN = strtol(accountNo, &e, 10);
     
-    strcat(accountNo,".csv"); 
-    strcat(path, accountNo);
-    accountfile=fopen(path,"a+");
+    char *filename=strcat(accountNo,".csv");                 
+    accountfile=fopen(filename,"a+");
+
+    fprintf(accountfile,"%ld,",accountN);
+    fprintf(accountfile,"%s,",temp->name);
+    fprintf(accountfile,"%d",temp->date.dd);
+    fprintf(accountfile,"/");
+    fprintf(accountfile,"%d",temp->date.mm);
+    fprintf(accountfile,"/");
+    fprintf(accountfile,"%d",temp->date.yy);
 
     accountN++;
 
