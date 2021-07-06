@@ -14,6 +14,8 @@ void createAccount(struct accountdetail *account)
     FILE *fp, *global;
     char buffer[1024];
 
+    
+
     fp = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\AccountDetails.csv", "a++");
 
     global = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\global.csv", "r");
