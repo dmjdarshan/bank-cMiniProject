@@ -14,9 +14,9 @@ void createAccount(struct accountdetail *account)
     FILE *fp, *global;
     char buffer[1024];
 
-    fp = fopen("AccountDetails.csv", "a++");
+    fp = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\AccountDetails.csv", "a++");
 
-    global = fopen("global.csv", "r");
+    global = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\global.csv", "r");
 
     fgets(buffer, 1024, global);
 
@@ -117,15 +117,17 @@ void createDB()
 {
     FILE *global;
     char* e;
+    char* path = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
 
     FILE *accountfile;
 
-    global = fopen("global.csv", "w");
+    global = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\global.csv", "w");
 
     accountN = strtol(accountNo, &e, 10);
     
-    strcat(accountNo,".csv");                 
-    accountfile=fopen(accountNo,"a+");
+    strcat(accountNo,".csv"); 
+    strcat(path, accountNo);
+    accountfile=fopen(path,"a+");
 
     accountN++;
 
