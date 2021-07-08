@@ -3,7 +3,7 @@ struct dob
     int dd;
     int mm;
     int yy;
-};
+}todaysDate;
 struct accountdetail
 {
     char name[50];
