@@ -26,7 +26,7 @@ int withdraw()
 
     mainfile=fopen("Accountdetails.csv","r+");
     
-    printf("Enter the 10 digit Account Number\n");
+    printf("Enter the Account Number\n");
     scanf("%s",accountnumber);
     
     char *filename=strcat(accountnumber,".csv");
@@ -37,7 +37,7 @@ int withdraw()
     { 
         printf("\n");
         delay(1000000000);
-        printf("Invalid account number\n");
+        printf("INVALID ACCOUNT NUMBER!!!!\n");
         exit(0);
     }
     else
@@ -67,7 +67,7 @@ int withdraw()
 
     delay(1000000000);
 
-    printf("Enter the amount u want to withdraw  :  ");
+    printf("Enter the amount customer want to withdraw  :  ");
     scanf("%lg",&withdrawamt);
     
     AMOUNT=AMOUNT-withdrawamt;
@@ -75,7 +75,7 @@ int withdraw()
     delay(1000000000);
 
     printf("\n");
-    printf("The amaount has been sucessfully withdrawed\n");
+    printf("The amaount has been sucessfully withdrawn!!\n");
     printf("\n");
 
     delay(1000000000);
