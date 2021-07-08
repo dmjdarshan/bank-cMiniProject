@@ -1,13 +1,12 @@
-struct dob
-{
-    int dd;
-    int mm;
-    int yy;
-};
 struct accountdetail
 {
     char name[50];
-    struct dob date;
+    struct dob 
+    {
+        int dd;
+        int mm;
+        int yy;
+    }date;
     char gender[15];
     char mname[50];
     char fname[50];
@@ -25,3 +24,4 @@ struct accountdetail
 };
 
 void createAccount(struct accountdetail *account);
+int withdraw();

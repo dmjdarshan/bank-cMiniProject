@@ -131,11 +131,13 @@ void createDB(struct accountdetail *temp)
 
     fprintf(accountfile,"%ld,",accountN);
     fprintf(accountfile,"%s,",temp->name);
+    fprintf(accountfile,"%s,",temp->amount);
     fprintf(accountfile,"%d",temp->date.dd);
     fprintf(accountfile,"/");
     fprintf(accountfile,"%d",temp->date.mm);
     fprintf(accountfile,"/");
-    fprintf(accountfile,"%d",temp->date.yy);
+    fprintf(accountfile,"%d,",temp->date.yy);
+    
 
     accountN++;
 

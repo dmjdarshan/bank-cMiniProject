@@ -3,6 +3,8 @@
 int main()
 {
     struct accountdetail account;
-    createAccount(&account);
+    //createAccount(&account);
+
+    withdraw();
 
 }
