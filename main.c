@@ -4,6 +4,15 @@
 
 int main_exit;
 
+void askDate()
+{
+    system("cls");
+    printf("\n\n\n\t\t\t\tBANK MANAGEMENT SYSTEM");
+    printf("\n\n\t\t\t\t\tEnter Today's Date(dd/mm/yyyy): ");
+    scanf("%d/%d/%d", &todaysDate.dd, &todaysDate.mm, &todaysDate.yy);
+    
+}
+
 void fordelay(int j)
 {   int i,k;
     for(i=0;i<j;i++)
@@ -23,6 +32,7 @@ void menu(void)
     system("cls");
     system("color 9");
     printf("\n\n\t\t\tBANK MANAGEMENT SYSTEM");
+    printf("\n\n\t\t\t\t\t\t%d/%d/%d", todaysDate.dd, todaysDate.mm, todaysDate.yy);
     printf("\n\n\n\t\t\t\xB2\xB2\xB2\xB2\xB2\xB2\xB2 WELCOME TO THE MAIN MENU \xB2\xB2\xB2\xB2\xB2\xB2\xB2");
     printf("\n\n\t\t1.Create new account\n\t\t2.Withdraw\n\t\t3.Deposit\n\t\t4.View Account holder's list\n\t\t5.Check the existing Account details\n\t\t6.Delete Account\n\t\t7.Exit\n\n\n\n\n\t\t Enter your choice:");
     scanf("%d",&choice);
@@ -68,7 +78,9 @@ int main()
             fordelay(100000000);
             printf(".");
         }
-                system("cls");
+            system("cls");
+            askDate();
+            system("cls");
             menu();
         }
     else
