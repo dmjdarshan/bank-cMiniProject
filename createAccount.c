@@ -8,6 +8,8 @@ void createDB();
 char* accountNo;
 char* date;
 long accountN;
+int main_exit;
+
 
 void createAccount(struct accountdetail *account)
 {
@@ -23,6 +25,7 @@ void createAccount(struct accountdetail *account)
     accountNo = strtok(buffer, ",");
     date = strtok(NULL , ",");
 
+    fprintf(fp,"%d/%d/%d,", todaysDate.dd, todaysDate.mm, todaysDate.yy);
     fprintf(fp,"\n%s,",accountNo);
 
     printf("Account Holder Name : ");
@@ -106,7 +109,22 @@ void createAccount(struct accountdetail *account)
     printf("\n");
 
     printf("Your account number is %ld \n",(accountN-1));
+
+    delay(100000000);
     
+    add_invalid:
+    printf("\n\n\n\t\tEnter 1 to go to the main menu and 0 to exit:");
+    scanf("%d",&main_exit);
+    system("cls");
+    if (main_exit==1)
+        menu();
+    else if(main_exit==0)
+            close();
+    else
+        {
+            printf("\nInvalid!\a");
+            goto add_invalid;
+        }
 
     fclose(fp);
     fclose(global);

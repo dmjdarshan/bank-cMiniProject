@@ -25,3 +25,6 @@ struct accountdetail
 };
 
 void createAccount(struct accountdetail *account);
+void delay(int j);
+void close(void);
+void menu(void);

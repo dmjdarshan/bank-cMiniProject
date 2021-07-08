@@ -2,6 +2,7 @@
 #include "header.h"
 #include <windows.h>
 
+
 int main_exit;
 
 void askDate()
@@ -13,7 +14,7 @@ void askDate()
     
 }
 
-void fordelay(int j)
+void delay(int j)
 {   int i,k;
     for(i=0;i<j;i++)
          k=i;
@@ -75,7 +76,7 @@ int main()
         {printf("\n\nPassword Match!\nLOADING");
         for(i=0;i<=6;i++)
         {
-            fordelay(100000000);
+            delay(100000000);
             printf(".");
         }
             system("cls");
@@ -101,7 +102,7 @@ int main()
                     close();}
             else
                     {printf("\nInvalid!");
-                    fordelay(1000000000);
+                    delay(1000000000);
                     system("cls");
                     goto login_try;}
 
