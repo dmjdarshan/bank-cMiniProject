@@ -29,8 +29,10 @@ struct accountdetail
 
 
 
+
 void createAccount(struct accountdetail *account);
 void delay(long int j);
 void close(void);
 void menu(void);
 void accountDetails();
+int withdraw();

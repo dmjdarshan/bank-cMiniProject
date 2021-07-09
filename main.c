@@ -57,7 +57,7 @@ void menu(void)
     {
         case 1:createAccount(&account);;
         break;
-        case 2:printf("Prajwal your function here");;
+        case 2:withdraw();
         break;
         case 3:printf("Adithya your function here");;
         break;
