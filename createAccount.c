@@ -3,13 +3,12 @@
 #include <stdlib.h>
 #include "header.h"
 
-void createDB();
+void createDB(struct accountdetail *temp);
 
 char* accountNo;
 char* date;
 long accountN;
 int main_exit;
-
 
 void createAccount(struct accountdetail *account)
 {
@@ -25,11 +24,10 @@ void createAccount(struct accountdetail *account)
     accountNo = strtok(buffer, ",");
     date = strtok(NULL , ",");
 
-    fprintf(fp,"%d/%d/%d,", todaysDate.dd, todaysDate.mm, todaysDate.yy);
     fprintf(fp,"\n%s,",accountNo);
 
     printf("Account Holder Name : ");
-    fscanf(stdin, "%s", account->name) != EOF;
+    fscanf(stdin, "%s", account->name);
     fprintf(fp, "%s,", account->name);
     fflush(stdin);
 
@@ -101,11 +99,13 @@ void createAccount(struct accountdetail *account)
     fscanf(stdin, "%s", account->acctype);
     fprintf(fp, "%s", account->acctype);
 
-   
+    struct accountdetail temp;
+    temp=*account;
 
-    createDB();
 
-    printf("\nYour has been sucessfull created\n");
+    createDB(&temp);
+
+    printf("\nYour %s has been sucessfull created\n", account->acctype);
     printf("\n");
 
     printf("Your account number is %ld \n",(accountN-1));
@@ -113,39 +113,52 @@ void createAccount(struct accountdetail *account)
     delay(100000000);
     
     add_invalid:
+    
     printf("\n\n\n\t\tEnter 1 to go to the main menu and 0 to exit:");
     scanf("%d",&main_exit);
     system("cls");
-    if (main_exit==1)
+    if (main_exit== 1)
         menu();
-    else if(main_exit==0)
-            close();
+    else if(main_exit== 0)
+        close();
     else
         {
             printf("\nInvalid!\a");
             goto add_invalid;
         }
+    
 
     fclose(fp);
     fclose(global);
 }
 
-
-void createDB()
+void createDB(struct accountdetail *temp)
 {
+
     FILE *global;
     char* e;
-    char* path = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
 
     FILE *accountfile;
+    char path[100] = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
 
     global = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\global.csv", "w");
 
     accountN = strtol(accountNo, &e, 10);
     
-    strcat(accountNo,".csv"); 
-    strcat(path, accountNo);
-    accountfile=fopen(path,"a+");
+    char *buff=strcat(accountNo,".csv"); 
+    char* filename = strcat(path, buff);
+                    
+    accountfile=fopen(filename,"a+");
+
+    fprintf(accountfile,"Account Number: %ld\n",accountN);
+    fprintf(accountfile,"Name: %s\n",temp->name);
+    fprintf(accountfile,"Account Created on: %d",temp->date.dd);
+    fprintf(accountfile,"/");
+    fprintf(accountfile,"%d",temp->date.mm);
+    fprintf(accountfile,"/");
+    fprintf(accountfile,"%d\n",temp->date.yy);
+    fprintf(accountfile,"Balance: %s\n",temp->amount);
+    
 
     accountN++;
 

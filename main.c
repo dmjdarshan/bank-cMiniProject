@@ -14,7 +14,7 @@ void askDate()
     
 }
 
-void delay(int j)
+void delay(long int j)
 {   int i,k;
     for(i=0;i<j;i++)
          k=i;
@@ -22,7 +22,21 @@ void delay(int j)
 
 void close(void)
 {
-    printf("\n\n\n\nThis C Mini Project is developed by Code With C team!");
+    system("cls");
+    printf("\n\n\n\nThis C Mini Project is developed by !");
+    delay(100000000);
+    delay(100000000);
+    delay(100000000);
+    delay(100000000);
+    delay(100000000);
+    delay(100000000);
+    delay(100000000);
+    delay(100000000);
+    delay(100000000);
+    delay(100000000);
+    delay(100000000);
+    delay(100000000);
+    exit(0);
 }
 
 void menu(void)
@@ -47,7 +61,7 @@ void menu(void)
         break;
         case 3:printf("Adithya your function here");;
         break;
-        case 4:printf("Darshan your function here");;
+        case 4:accountDetails();
         break;
         case 5:printf("Darshan your function here");;
         break;

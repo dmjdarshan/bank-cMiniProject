@@ -1,3 +1,5 @@
+#include <windows.h>
+
 struct dob
 {
     int dd;
@@ -24,7 +26,11 @@ struct accountdetail
     char acctype[15];
 };
 
+
+
+
 void createAccount(struct accountdetail *account);
-void delay(int j);
+void delay(long int j);
 void close(void);
 void menu(void);
+void accountDetails();
