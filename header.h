@@ -36,3 +36,4 @@ void close(void);
 void menu(void);
 void accountDetails();
 int withdraw();
+int findAccount(char* accountNo);

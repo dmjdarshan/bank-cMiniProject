@@ -5,6 +5,30 @@
 
 int main_exit;
 
+
+
+int findAccount(char* accountNo)
+{
+    FILE *accountfile; 
+    char path[100] = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
+    char *buff=strcat(accountNo,".csv"); 
+    char* filename = strcat(path, buff);
+    accountfile=fopen(filename,"r");
+
+    if (accountfile != NULL)
+    {
+        fclose(accountfile);
+        return 1; 
+           
+    }
+    else{
+        fclose(accountfile);
+        return 0;
+    }
+
+    
+}
+
 void askDate()
 {
     system("cls");

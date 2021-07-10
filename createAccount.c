@@ -86,11 +86,6 @@ void createAccount(struct accountdetail *account)
     fprintf(fp, "%s,", account->pan);
     fflush(stdin);
 
-    printf("\nEnter the amount u want to deposit : ");
-    fscanf(stdin, "%s", &account->amount);
-    fprintf(fp, "%s,", account->amount);
-    fflush(stdin);
-
     printf("\nAccount Type\n");
     printf("1 . Savings Account\n");
     printf("2 . Current Account\n");
@@ -98,6 +93,12 @@ void createAccount(struct accountdetail *account)
     printf("Enter the choice(Savings,Current) : ");
     fscanf(stdin, "%s", account->acctype);
     fprintf(fp, "%s", account->acctype);
+
+
+    printf("\nEnter the amount u want to deposit : ");
+    fscanf(stdin, "%s", &account->amount);
+    //fprintf(fp, "%s,", account->amount);
+    fflush(stdin);
 
     struct accountdetail temp;
     temp=*account;
@@ -150,14 +151,24 @@ void createDB(struct accountdetail *temp)
                     
     accountfile=fopen(filename,"a+");
 
-    fprintf(accountfile,"Account Number: %ld\n",accountN);
-    fprintf(accountfile,"Name: %s\n",temp->name);
-    fprintf(accountfile,"Account Created on: %d",temp->date.dd);
+    fprintf(accountfile,"%ld,",accountN);
+    fprintf(accountfile,"%s,",temp->name);
+    fprintf(accountfile,"%d",temp->date.dd);
     fprintf(accountfile,"/");
     fprintf(accountfile,"%d",temp->date.mm);
     fprintf(accountfile,"/");
     fprintf(accountfile,"%d\n",temp->date.yy);
-    fprintf(accountfile,"Balance: %s\n",temp->amount);
+    
+    fprintf(accountfile,"Deposit,");
+    fprintf(accountfile,"%d",todaysDate.dd);
+    fprintf(accountfile,"/");
+    fprintf(accountfile,"%d",todaysDate.mm);
+    fprintf(accountfile,"/");
+    fprintf(accountfile,"%d,",todaysDate.yy);
+    fprintf(accountfile,__TIME__);
+    fprintf(accountfile,",");
+    fprintf(accountfile,"%s,",temp->amount);
+    fprintf(accountfile,"%s\n",temp->amount);
     
 
     accountN++;

@@ -32,7 +32,8 @@ void avail_loan(struct loan *ptr)
                  fptr1=fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\AccountDetails.csv","r");
                  {
                          char line[100];
-                          while((fgets(line,100,fptr1))!=NULL)
+                         
+                          while((fgets(line,100,fptr1)))
                          {
                                char *token=strtok(line,",");
                                if(strcmp(token,acc)==0)
@@ -61,6 +62,7 @@ void avail_loan(struct loan *ptr)
                                        printf(" You are not eligible for availing the loan \n "); 
                                        exit(0);
                                 }
+                                char *token=strtok(NULL,",");
                }
      }
      fclose(fptr1);

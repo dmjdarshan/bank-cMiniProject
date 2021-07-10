@@ -4,7 +4,7 @@
 #include<time.h>
 #include "header.h"
 
-char path[100] = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
+
 int main_exit;
 void systime(char *filename,FILE *accountfile);
 
@@ -20,29 +20,63 @@ int withdraw()
     char *accountNo;                   //account number from the user file
     char *accountname;                 //account name from the user file
     char *amount;                      //amount user inputs
-    char *temp;                     
+    char *temp; 
+    char *filename;                    
     
+    int result;
+
     double AMOUNT;                     //total amount
     double withdrawamt;                //the amount user withdraws
 
 
     mainfile=fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\AccountDetails.csv","r+");
-    account:
+    system("cls");
     printf("Enter the Account Number\n");
     scanf("%s",accountnumber);
+    fflush(stdin);
     
-    char *buff=strcat(accountNo,".csv"); 
-    char* filename = strcat(path, buff);
-    accountfile=fopen(filename,"r");
+    result = findAccount(accountnumber);
+    
+    if (result == 0)
+    {
+        printf("Invalid Account Number\n");
+        delay(10000000);
+        delay(10000000);
+        delay(10000000);
+        delay(10000000);
+        delay(10000000);
+        delay(10000000);
+        withdraw();
+    }
+    else{
 
+        char path[100] = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
+        char *buff= strcat(accountnumber,".csv"); 
+        char* filename = strcat(path, buff);
+        accountfile=fopen(filename,"r");
 
+        fgets(buffer, 1024, accountfile);
+        printf("\n%s", buffer);
+        accountNo = strtok(buffer, ",");
+        accountname = strtok(NULL, ",");
+        printf("%s", accountname);
+
+        fgets(buffer, 1024, accountfile);
+        
+        
+
+        fclose(accountfile);
+    }
+
+    
+
+    /*
     if(accountfile==NULL)
     { 
-        system("cls");
         printf("\n");
         delay(1000000000);
         printf("INVALID ACCOUNT NUMBER!!!!\n");
-        goto account;
+        
     }
     else
     {
@@ -54,8 +88,10 @@ int withdraw()
             amount=strtok(NULL,",");
         }
 
-    }
-    fclose(accountfile);
+    }*/
+   // fclose(accountfile);
+
+
     accountfile=fopen(filename,"a+");
 
     delay(1000000000);
@@ -89,25 +125,15 @@ int withdraw()
 
 
     fprintf(accountfile,"\nWithdraw,");
-    fprintf(accountfile,"%s,",accountNo);
-    fprintf(accountfile,"%s,",accountname);
-    fprintf(accountfile,"%.2lf,",AMOUNT);
+    fprintf(accountfile,"%d",todaysDate.dd);
+    fprintf(accountfile,"/");
+    fprintf(accountfile,"%d",todaysDate.mm);
+    fprintf(accountfile,"/");
+    fprintf(accountfile,"%d,",todaysDate.yy);
+    fprintf(accountfile,__TIME__);
+    fprintf(accountfile,",");
     fprintf(accountfile,"%.2lf,",withdrawamt);
-
-    systime(filename,accountfile);
-
-    char mainfilebuffer[1024];            //entire line from the mainfile
-    char *maintemp,*mainamount;         
-
-    while((fgets(mainfilebuffer,1024,mainfile))!=NULL)    //this part is remaining.to change the amount in mainfile
-    {
-        maintemp=strtok(mainfilebuffer,",");
-
-        for(int i=1;i<=11;i++)
-        {
-            mainamount=strtok(NULL,",");
-        }
-    }
+    fprintf(accountfile,"%.2lf,",AMOUNT);
 
     add_invalid:
     
@@ -127,23 +153,4 @@ int withdraw()
     fclose(mainfile);
     fclose(accountfile);
     
-}
-
-
-void systime(char *filename,FILE *accountfile)        //returns the system date
-{
-    accountfile=fopen(filename,"a+") ;
-    int hours, minutes, seconds;
-
-    time_t now;                                        //predefined structure in time.h
-
-    time(&now);
-
-    struct tm *local=localtime(&now);
-
-   hours = local->tm_hour;
-   minutes = local->tm_min;
-   seconds=local->tm_sec;
-   
-   fprintf(accountfile,"%d:%d:%d",hours,minutes,seconds);
 }
