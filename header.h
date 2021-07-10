@@ -41,6 +41,6 @@ void delay(long int j);
 void close(void);
 void menu(void);
 void accountDetails();
-void passbook();
+int passbook();
 int withdraw();
 char* findAccount(char* accountNo);

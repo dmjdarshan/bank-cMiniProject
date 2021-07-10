@@ -8,7 +8,7 @@
 int main_exit;
 void further(char* accountNo, char* result);
 
-
+char path[100] = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
 
 int withdraw()
 {          
@@ -78,7 +78,7 @@ void further(char* accountNo, char* result)
     int typ = atoi(type);
     
     
-    char* filename = strcat(globe.path, accountNo);
+    char* filename = strcat(path, accountNo);
     
     accountfile=fopen(filename,"a+");
     delay(1000000000);

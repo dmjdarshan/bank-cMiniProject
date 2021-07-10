@@ -9,12 +9,21 @@ int main_exit;
 
 char* findAccount(char* accountNo)
 {
+
+    char path[100] = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
     FILE *accountfile; 
     char t[1024], buffer[1024];
     char* ano, *an,*res,*amount,*temp, *temp1, *temp2;
     char *buff=strcat(accountNo,".csv"); 
-    char* filename = strcat(globe.path, buff);
+
+    char* filename;
+
+    
+
+    filename = strcat(path, buff);
     accountfile=fopen(filename,"r");
+
+    
 
     if (accountfile != NULL)
     {
@@ -22,9 +31,9 @@ char* findAccount(char* accountNo)
         ano = strtok(t, ",");
         an = strtok(NULL, ",");
         char* typ;
-        typ=strtok(NULL,",");
+        typ = strtok(NULL,",");
 
-
+        
         if (strcmp(typ, "Savings") == 0)
         {
             temp = strcat(an,",1,");
@@ -33,6 +42,9 @@ char* findAccount(char* accountNo)
         {
             temp = strcat(an,",0,");
         }
+
+
+        
 
         while(fgets(buffer, 1024, accountfile) != NULL)
         {
@@ -45,8 +57,8 @@ char* findAccount(char* accountNo)
 
         res =strcat(temp, amount);
         
-
         fclose(accountfile);
+
 
         return res;
            
@@ -97,7 +109,9 @@ void menu(void)
 {   
     int choice;
     struct accountdetail account;
-    
+
+
+
     system("cls");
     system("color 9");
     printf("\n\n\t\t\tBANK MANAGEMENT SYSTEM");
@@ -134,6 +148,8 @@ int main()
     
     //change your path to DB here
     strcpy(globe.path,"D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\");
+    
+
 
     system("cls");
     system("color 9");

@@ -15,9 +15,11 @@ void createAccount(struct accountdetail *account)
     FILE *fp, *global;
     char buffer[1024];
 
+    char path[100] = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
+
     char* filename, *filename1;
-    filename = strcat(globe.path, "AccountDetails.csv");
-    filename1 = strcat(globe.path, "global.csv");
+    filename = strcat(path, "AccountDetails.csv");
+    filename1 = strcat(path, "global.csv");
 
     fp = fopen(filename, "a++");
 
@@ -145,7 +147,10 @@ void createDB(struct accountdetail *temp)
 
     FILE *accountfile;
     char* filename;
-    filename = strcat(globe.path, "global.csv");
+
+    char path[100] = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
+
+    filename = strcat(path, "global.csv");
     global = fopen(filename, "w");
 
     accountN = strtol(accountNo, &e, 10);
