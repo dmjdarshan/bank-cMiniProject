@@ -10,7 +10,10 @@ void accountDetails()
     FILE *fp;
     char buffer[1024], *value;
     int i;
-    fp = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\AccountDetails.csv", "r");
+
+    char* filename;
+    filename = strcat(globe.path, "AccountDetails.csv");
+    fp = fopen(filename, "r");
     
 
     while (fgets(buffer, 1024, fp))

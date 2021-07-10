@@ -15,9 +15,13 @@ void createAccount(struct accountdetail *account)
     FILE *fp, *global;
     char buffer[1024];
 
-    fp = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\AccountDetails.csv", "a++");
+    char* filename, *filename1;
+    filename = strcat(globe.path, "AccountDetails.csv");
+    filename1 = strcat(globe.path, "global.csv");
 
-    global = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\global.csv", "r");
+    fp = fopen(filename, "a++");
+
+    global = fopen(filename1, "r");
 
     fgets(buffer, 1024, global);
 
@@ -140,19 +144,20 @@ void createDB(struct accountdetail *temp)
     char* e;
 
     FILE *accountfile;
-    char path[100] = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
-
-    global = fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\global.csv", "w");
+    char* filename;
+    filename = strcat(globe.path, "global.csv");
+    global = fopen(filename, "w");
 
     accountN = strtol(accountNo, &e, 10);
     
     char *buff=strcat(accountNo,".csv"); 
-    char* filename = strcat(path, buff);
+    filename = strcat(globe.path, buff);
                     
     accountfile=fopen(filename,"a+");
 
     fprintf(accountfile,"%ld,",accountN);
     fprintf(accountfile,"%s,",temp->name);
+    fprintf(accountfile,"%s,",temp->acctype);
     fprintf(accountfile,"%d",temp->date.dd);
     fprintf(accountfile,"/");
     fprintf(accountfile,"%d",temp->date.mm);
@@ -168,7 +173,7 @@ void createDB(struct accountdetail *temp)
     fprintf(accountfile,__TIME__);
     fprintf(accountfile,",");
     fprintf(accountfile,"%s,",temp->amount);
-    fprintf(accountfile,"%s\n",temp->amount);
+    fprintf(accountfile,"%s",temp->amount);
     
 
     accountN++;

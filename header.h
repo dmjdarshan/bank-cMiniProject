@@ -26,6 +26,12 @@ struct accountdetail
     char acctype[15];
 };
 
+struct globals
+{
+    char path[100];
+}globe;
+
+
 
 
 
@@ -35,5 +41,6 @@ void delay(long int j);
 void close(void);
 void menu(void);
 void accountDetails();
+void passbook();
 int withdraw();
-int findAccount(char* accountNo);
+char* findAccount(char* accountNo);
