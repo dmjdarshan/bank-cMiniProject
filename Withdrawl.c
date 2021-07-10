@@ -6,38 +6,29 @@
 
 
 int main_exit;
-void systime(char *filename,FILE *accountfile);
+void further(char* accountNo, char* result);
+
 
 
 int withdraw()
-{
-    FILE *mainfile;                 
-    FILE *accountfile;        
-
+{          
     char accountnumber[15];            //user input
     char buffer[1024];                 //entire line from the accountfile
     
-    char *accountNo;                   //account number from the user file
     char *accountname;                 //account name from the user file
     char *amount;                      //amount user inputs
-    char *temp; 
-    char *filename;                    
+    char *temp;                   
     
-    int result;
+    char* result;
 
-    double AMOUNT;                     //total amount
-    double withdrawamt;                //the amount user withdraws
-
-
-    mainfile=fopen("D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\AccountDetails.csv","r+");
     system("cls");
     printf("Enter the Account Number\n");
     scanf("%s",accountnumber);
     fflush(stdin);
     
-    result = findAccount(accountnumber);
+    result = findAccount(accountnumber);   
     
-    if (result == 0)
+    if (result == NULL)
     {
         printf("Invalid Account Number\n");
         delay(10000000);
@@ -50,79 +41,136 @@ int withdraw()
     }
     else{
 
-        char path[100] = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
-        char *buff= strcat(accountnumber,".csv"); 
-        char* filename = strcat(path, buff);
-        accountfile=fopen(filename,"r");
-
-        fgets(buffer, 1024, accountfile);
-        printf("\n%s", buffer);
-        accountNo = strtok(buffer, ",");
-        accountname = strtok(NULL, ",");
-        printf("%s", accountname);
-
-        fgets(buffer, 1024, accountfile);
-        
-        
-
-        fclose(accountfile);
+        further(accountnumber, result);   
     }
+}
+
+void further(char* accountNo, char* result)
+{
+    FILE *accountfile;  
+        
+    double AMOUNT;                     //total amount
+    double withdrawamt;                //the amount user withdraws
+
+    char* accountname;
+    char* amount; 
+    char* type;
 
     
 
-    /*
-    if(accountfile==NULL)
-    { 
-        printf("\n");
-        delay(1000000000);
-        printf("INVALID ACCOUNT NUMBER!!!!\n");
-        
-    }
-    else
-    {
-        while((fgets(buffer,1024,accountfile))!=NULL)
-        {
-            temp=strtok(buffer,",");
-            accountNo=strtok(NULL,",");
-            accountname=strtok(NULL,",");
-            amount=strtok(NULL,",");
-        }
+    accountname = strtok(result, ",");
+    type = strtok(NULL, ",");
+    amount = strtok(NULL, ",");
+    
+    
 
-    }*/
-   // fclose(accountfile);
-
-
-    accountfile=fopen(filename,"a+");
-
-    delay(1000000000);
+    
 
     printf("\n");
     printf("The account holder name is %s\n",accountname);
     printf("\n");
     printf("The balance in the account is %s \n",amount);
     printf("\n");
-    
+
     char *ptr;
     AMOUNT=strtod(amount,&ptr);   //standard function in stdlib.h
 
+    int typ = atoi(type);
+    
+    
+    char* filename = strcat(globe.path, accountNo);
+    
+    accountfile=fopen(filename,"a+");
     delay(1000000000);
+
+
+    withD:
+    system("cls");
+
+    printf("\nBalance: %lg\n", AMOUNT);
 
     printf("Enter the amount customer want to withdraw  :  ");
     scanf("%lg",&withdrawamt);
+
     
-    AMOUNT=AMOUNT-withdrawamt;
+    
+    if (typ == 1)
+    {
+        if (withdrawamt >= 50000.00)
+        {
+            printf("\nAmount too large!!\n");
+            printf("\nOnly less than Rs.50000 is possible for Savings Account\n");
 
-    delay(1000000000);
+            delay(1000000000);
+            delay(100000000);
+            delay(100000000);
+            delay(100000000);
+            delay(100000000);
+            delay(100000000);
+            delay(100000000);
+            delay(100000000);
+            goto withD;
+        }
+        else if ((AMOUNT - withdrawamt) < 500.0)
+        {
+            printf("\nInsufficient Balance(Min Bal: Rs.500 required)!!\n");
+            delay(1000000000);
+            delay(100000000);
+            delay(100000000);
+            delay(100000000);
+            delay(100000000);
+            delay(100000000);
+            delay(100000000);
+            delay(100000000);
+            goto withD;
+        }
+        else
+            AMOUNT=AMOUNT-withdrawamt;
+            delay(100000000);
 
-    printf("\n");
-    printf("The amaount has been sucessfully withdrawn!!\n");
-    printf("\n");
+            printf("\n");
+            printf("The amount has been sucessfully withdrawn!!\n");
+            printf("\n");
+            delay(1000000000);
 
-    delay(1000000000);
+            printf("Account balance is %.2lf",AMOUNT);
+            printf("\n");
+    }
+    else if (typ == 0)
+    {
+        if ((withdrawamt <= AMOUNT))
+        {
+            
+        AMOUNT=AMOUNT-withdrawamt;
+        delay(100000000);
 
-    printf("Account balance is %.2lf",AMOUNT);
-    printf("\n");
+            printf("\n");
+            printf("The amount has been sucessfully withdrawn!!\n");
+            printf("\n");
+            delay(1000000000);
 
+            printf("Account balance is %.2lf",AMOUNT);
+            printf("\n");
+        }
+
+        else{
+            printf("\nInsufficient Balance(Min Bal: Rs.500 required)!!\n");
+            delay(1000000000);
+            delay(100000000);
+            delay(100000000);
+            delay(100000000);
+            delay(100000000);
+            delay(100000000);
+            delay(100000000);
+            delay(100000000);
+            goto withD;
+        }
+    }
+    
+
+    
+
+    
 
     fprintf(accountfile,"\nWithdraw,");
     fprintf(accountfile,"%d",todaysDate.dd);
@@ -133,7 +181,7 @@ int withdraw()
     fprintf(accountfile,__TIME__);
     fprintf(accountfile,",");
     fprintf(accountfile,"%.2lf,",withdrawamt);
-    fprintf(accountfile,"%.2lf,",AMOUNT);
+    fprintf(accountfile,"%.2lf",AMOUNT);
 
     add_invalid:
     
@@ -150,7 +198,5 @@ int withdraw()
             goto add_invalid;
         }
 
-    fclose(mainfile);
     fclose(accountfile);
-    
 }
