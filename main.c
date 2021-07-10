@@ -127,7 +127,7 @@ void menu(void)
         break;
         case 2:withdraw();
         break;
-        case 3:printf("Adithya your function here");;
+        case 3:deposit();
         break;
         case 4:accountDetails();
         break;

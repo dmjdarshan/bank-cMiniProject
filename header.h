@@ -43,4 +43,5 @@ void menu(void);
 void accountDetails();
 int passbook();
 int withdraw();
+int deposit();
 char* findAccount(char* accountNo);

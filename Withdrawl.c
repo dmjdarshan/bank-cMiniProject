@@ -8,10 +8,11 @@
 int main_exit;
 void further(char* accountNo, char* result);
 
-char path[100] = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
+
 
 int withdraw()
-{          
+{     
+    char path[100] = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";     
     char accountnumber[15];            //user input
     char buffer[1024];                 //entire line from the accountfile
     
@@ -47,6 +48,8 @@ int withdraw()
 
 void further(char* accountNo, char* result)
 {
+
+    char path[100] = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
     FILE *accountfile;  
         
     double AMOUNT;                     //total amount
