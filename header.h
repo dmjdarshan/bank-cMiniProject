@@ -1,9 +1,11 @@
+#include <windows.h>
+
 struct dob
 {
     int dd;
     int mm;
     int yy;
-};
+}todaysDate;
 struct accountdetail
 {
     char name[50];
@@ -24,4 +26,14 @@ struct accountdetail
     char acctype[15];
 };
 
+
+
+
+
 void createAccount(struct accountdetail *account);
+void delay(long int j);
+void close(void);
+void menu(void);
+void accountDetails();
+int withdraw();
+int findAccount(char* accountNo);
