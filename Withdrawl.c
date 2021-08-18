@@ -11,7 +11,8 @@ void further(char* accountNo, char* result);
 
 
 int withdraw()
-{          
+{     
+    char path[100] = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";     
     char accountnumber[15];            //user input
     char buffer[1024];                 //entire line from the accountfile
     
@@ -47,6 +48,8 @@ int withdraw()
 
 void further(char* accountNo, char* result)
 {
+
+    char path[100] = "D:\\DARSHAN BTECH\\bank-cMiniProject\\database\\";
     FILE *accountfile;  
         
     double AMOUNT;                     //total amount
@@ -78,7 +81,7 @@ void further(char* accountNo, char* result)
     int typ = atoi(type);
     
     
-    char* filename = strcat(globe.path, accountNo);
+    char* filename = strcat(path, accountNo);
     
     accountfile=fopen(filename,"a+");
     delay(1000000000);
